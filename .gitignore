@@ -1,0 +1,9 @@
+.DS_Store
+.vscode
+
+back/target
+
+front/node_modules
+front/*.log
+front/dist
+
