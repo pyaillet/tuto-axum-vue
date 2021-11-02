@@ -1,6 +1,5 @@
 FROM rust:1-slim-buster AS builder
 
-RUN mkdir -p /usr/src/server
 WORKDIR /usr/src/server
 COPY . .
 
