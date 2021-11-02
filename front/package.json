@@ -9,6 +9,7 @@
     "lint:fix": "eslint . --ext .js,.ts,.vue --fix"
   },
   "dependencies": {
+    "axios": "^0.24.0",
     "@tailwindcss/forms": "^0.2.1",
     "@tailwindcss/typography": "^0.4.0",
     "@vitejs/plugin-vue": "^1.1.0",
@@ -39,5 +40,10 @@
   },
   "lint-staged": {
     "*.{js,ts,vue}": "eslint --cache --fix"
+  },
+  "snowpack": {
+    "webDependencies": [
+      "axios"
+    ]
   }
 }

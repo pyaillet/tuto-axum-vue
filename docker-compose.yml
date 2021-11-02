@@ -1,0 +1,51 @@
+version: "3.9"  # optional since v1.27.0
+services:
+  front:
+    image: front
+    build: ./front
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.front.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.front.entrypoints=web"
+      - "traefik.http.services.front.loadbalancer.server.port=80"
+    ports:
+      - 80
+    networks:
+      - internal
+
+  back:
+    image: back
+    build: ./back
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.back.rule=PathPrefix(`/api`)"
+      - "traefik.http.routers.back.entrypoints=web"
+      - "traefik.http.services.back.loadbalancer.server.port=3000"
+    command:
+      - "/app/server"
+    ports:
+      - 3000
+    networks:
+      - internal
+
+  traefik:
+    image: "traefik:v2.5"
+    container_name: "traefik"
+    command:
+      #- "--log.level=DEBUG"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+    ports:
+      - "80:80"
+      - "8080:8080"
+    networks:
+      - internal
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+
+networks:
+  internal:
+
+
