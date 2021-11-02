@@ -1,6 +1,6 @@
 use axum::{
-    extract::Extension, handler::post, http::StatusCode, response::IntoResponse, routing::BoxRoute,
-    AddExtensionLayer, Json, Router,
+    extract::Extension, http::StatusCode, response::IntoResponse, routing::post, AddExtensionLayer,
+    Json, Router,
 };
 
 use std::net::SocketAddr;
@@ -20,7 +20,7 @@ async fn main() {
         .unwrap();
 }
 
-fn app() -> Router<BoxRoute> {
+fn app() -> Router {
     let messages = Mutex::new(Messages {
         content: Vec::new(),
     });
@@ -31,7 +31,6 @@ fn app() -> Router<BoxRoute> {
     Router::new()
         .route("/api/msg", post(create_message).get(get_messages))
         .layer(AddExtensionLayer::new(app_state))
-        .boxed()
 }
 
 async fn create_message(
