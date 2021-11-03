@@ -14,6 +14,10 @@ To launch the project just use docker-compose with:
 $ docker-compose up -d
 ```
 
+## Preview
+
+![Preview of the project](./img/preview.png)
+
 ## Credits
 
   - Vincent Dörig for the [Vue 3, TypeScript & Tailwind CSS starter with vite](https://github.com/vincentdoerig/vue3-typescript-tailwind-starter)
